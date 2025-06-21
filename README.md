@@ -6,6 +6,9 @@ A full-featured RESTful Library Management System built with **Node.js**, **Expr
 ## 🔗 Live Link
 - https://library-management-system-eight-ruddy.vercel.app/
 
+## 📽️ Video 
+- https://drive.google.com/file/d/1TYLrJk6GBHx4_4z3IiWMMNHSQIGc86DT/view?usp=sharing
+
 ## 🚀 Features
 
 - 🔐 **Schema Validation** with Mongoose & TypeScript
