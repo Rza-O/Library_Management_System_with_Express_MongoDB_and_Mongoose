@@ -28,10 +28,10 @@ exports.borrowRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
             yield availableBook.deductCopies(quantity);
             // save borrowed book info
             const bookBorrowed = yield borrow_model_1.Borrow.create(body);
-            res.status(201).json({ message: "Book borrowed successfully", success: true, data: bookBorrowed });
+            res.status(201).json({ success: true, message: "Book borrowed successfully", data: bookBorrowed });
         }
         else {
-            res.status(200).json({ message: "Please check books availability or quantity", success: false, data: availableBook });
+            res.status(200).json({ success: false, message: "Please check books availability or quantity", data: availableBook });
         }
     }
     catch (error) {
@@ -41,7 +41,7 @@ exports.borrowRoutes.post("/", (req, res) => __awaiter(void 0, void 0, void 0, f
 }));
 exports.borrowRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const books = yield borrow_model_1.Borrow.aggregate([
+        const booksBorrowed = yield borrow_model_1.Borrow.aggregate([
             {
                 $group: {
                     _id: "$book",
@@ -70,7 +70,7 @@ exports.borrowRoutes.get("/", (req, res) => __awaiter(void 0, void 0, void 0, fu
                 },
             },
         ]);
-        res.status(200).json({ message: "Borrowed books summary retrieved successfully", success: true, data: books });
+        res.status(200).json({ success: true, message: "Borrowed books summary retrieved successfully", data: booksBorrowed });
     }
     catch (error) {
         console.log(error);
