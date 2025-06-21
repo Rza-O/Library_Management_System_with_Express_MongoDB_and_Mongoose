@@ -4,11 +4,6 @@ import { Book } from "../models/book.model";
 
 export const borrowRoutes = express.Router();
 
-/**
- * POST /api/borrow
- * GET /api/borrow
- */
-
 borrowRoutes.post("/", async (req: Request, res: Response) => {
 	try {
 		const body = req.body;
@@ -18,7 +13,7 @@ borrowRoutes.post("/", async (req: Request, res: Response) => {
 		if (availableBook) {
 			// instance method to change copies and availability
 			await availableBook.deductCopies(quantity);
-			// save the book
+			// save borrowed book info
 			const bookBorrowed = await Borrow.create(body);
 			res.status(201).json({ message: "Book borrowed successfully", success: true, data: bookBorrowed });
 		} else {

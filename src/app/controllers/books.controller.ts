@@ -3,14 +3,6 @@ import { Book } from "../models/book.model";
 
 export const booksRoutes = express.Router();
 
-/**
- * POST /api/books
- * GET /api/books
- * GET /api/books/:bookId
- * PUT /api/books/:bookId
- * DELETE /api/books/:bookId
- */
-
 booksRoutes.post("/", async (req: Request, res: Response) => {
 	try {
 		const body = req.body;
