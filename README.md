@@ -3,6 +3,8 @@
 A full-featured RESTful Library Management System built with **Node.js**, **Express**, **TypeScript**, and **MongoDB (Mongoose)**. It supports core functionalities such as book management, borrowing system with availability tracking, data aggregation, and flexible querying.
 
 ---
+## 🔗 Live Link
+- https://library-management-system-eight-ruddy.vercel.app/
 
 ## 🚀 Features
 
@@ -33,14 +35,13 @@ A full-featured RESTful Library Management System built with **Node.js**, **Expr
 
 ```plaintext
 src/
-├── app.ts              # Express setup and configuration
-├── server.ts           # Application entry point
-├── routes/             # API routes for books and borrowing
-├── models/             # Mongoose models and interfaces
-├── controllers/        # Business logic handlers
-├── interfaces/         # TypeScript interfaces
-├── utils/              # Utility functions
-└── middlewares/        # Middleware (e.g., error handling)
+├── app.ts                  # Express setup and configuration
+    ├── routes/             # 
+    ├── models/             # Mongoose models and interfaces
+    ├── controllers/        # Business logic & API routes for books and borrowing
+    ├── interfaces/         # TypeScript interfaces
+├── server.ts               # Application entry point
+├── app.ts                  # Application entry point
 
 ```
 ---
