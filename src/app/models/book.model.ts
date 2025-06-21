@@ -23,12 +23,10 @@ const bookSchema = new Schema<IBook, Model<IBook>, IDeductCopies>(
 	}
 );
 
-// if copy is zero while inserting the book this falsify the availability
+// if copy is zero while inserting the book, this falsify the availability
 bookSchema.pre("save", function (next) {
 	if (this.copies === 0) {
 		this.available = false;
-	} else if (this.copies > 0) {
-		this.available = true;
 	}
 	next();
 });

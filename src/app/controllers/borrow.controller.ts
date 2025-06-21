@@ -15,9 +15,9 @@ borrowRoutes.post("/", async (req: Request, res: Response) => {
 			await availableBook.deductCopies(quantity);
 			// save borrowed book info
 			const bookBorrowed = await Borrow.create(body);
-			res.status(201).json({ message: "Book borrowed successfully", success: true, data: bookBorrowed });
+			res.status(201).json({ success: true, message: "Book borrowed successfully", data: bookBorrowed });
 		} else {
-			res.status(200).json({ message: "Please check books availability or quantity", success: false, data: availableBook });
+			res.status(200).json({ success: false, message: "Please check books availability or quantity", data: availableBook });
 		}
 	} catch (error) {
 		console.log(error);
@@ -27,7 +27,7 @@ borrowRoutes.post("/", async (req: Request, res: Response) => {
 
 borrowRoutes.get("/", async (req: Request, res: Response) => {
 	try {
-		const books = await Borrow.aggregate([
+		const booksBorrowed = await Borrow.aggregate([
 			{
 				$group: {
 					_id: "$book",
@@ -57,7 +57,7 @@ borrowRoutes.get("/", async (req: Request, res: Response) => {
 			},
 		]);
 
-		res.status(200).json({ message: "Borrowed books summary retrieved successfully", success: true, data: books });
+		res.status(200).json({ success: true, message: "Borrowed books summary retrieved successfully", data: booksBorrowed });
 	} catch (error) {
 		console.log(error);
 		res.status(404).json({ message: "Operation failed", success: false, error });
