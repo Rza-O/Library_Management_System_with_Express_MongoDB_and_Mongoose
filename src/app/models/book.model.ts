@@ -1,5 +1,5 @@
-import { model, Schema } from "mongoose";
-import { IBook } from "../interfaces/book.interfaces";
+import { Model, model, Schema } from "mongoose";
+import { IBook, IDeductCopies } from "../interfaces/book.interfaces";
 
 /**
  * title (string) — Mandatory. The book’s title.
@@ -11,7 +11,7 @@ copies (number) — Mandatory. Non-negative integer representing total copies av
 available (boolean) — Defaults to true. Indicates if the book is currently available for borrowing.
  */
 
-const bookSchema = new Schema<IBook>(
+const bookSchema = new Schema<IBook, Model<IBook>, IDeductCopies>(
 	{
 		title: { type: String, required: true, trim: true },
 		author: { type: String, required: true, trim: true },
@@ -33,11 +33,21 @@ const bookSchema = new Schema<IBook>(
 	}
 );
 
+// if copy is zero while inserting the book this falsify the availability
 bookSchema.pre("save", function (next) {
 	if (this.copies === 0) {
 		this.available = false;
+	} else if (this.copies > 0) {
+		this.available = true;
 	}
 	next();
 });
 
-export const Book = model<IBook>("Book", bookSchema);
+// Static method for reducing copies or setting availability to false
+bookSchema.method("deductCopies", async function deductCopies(quantity: number): Promise<void> {
+	this.copies -= quantity;
+	if (this.copies === 0) this.available = false;
+	await this.save();
+});
+
+export const Book = model("Book", bookSchema);

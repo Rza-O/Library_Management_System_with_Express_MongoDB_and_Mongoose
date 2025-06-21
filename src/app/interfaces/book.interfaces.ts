@@ -7,3 +7,7 @@ export interface IBook {
 	copies: number;
 	available: boolean;
 }
+
+export interface IDeductCopies {
+	deductCopies(quantity: number): Promise<void>;
+}
