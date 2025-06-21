@@ -31,7 +31,7 @@ bookSchema.pre("save", function (next) {
 	next();
 });
 
-// Static method for reducing copies or setting availability to false
+// instance method for reducing copies or setting availability to false
 bookSchema.method("deductCopies", async function deductCopies(quantity: number): Promise<void> {
 	this.copies -= quantity;
 	if (this.copies === 0) this.available = false;
